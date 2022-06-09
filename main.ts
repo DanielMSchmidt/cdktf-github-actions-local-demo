@@ -19,6 +19,16 @@ class MyStack extends TerraformStack {
         },
       },
     ]);
+
+    const otherPet = new r.Pet(this, "my-other-pet");
+    const otherResource = new n.Resource(this, "hello-other-pet");
+    otherResource.addOverride("provisioner", [
+      {
+        "local-exec": {
+          command: `echo 'Hello ${otherPet}'`,
+        },
+      },
+    ]);
   }
 }
 
