@@ -31,5 +31,5 @@ jobs:
           terraformVersion: 1.0.7
           cdktfVersion: 0.11.1
           stackName: cdktf-github-actions-local
-          mode: plan-and-apply
+          mode: auto-approve-apply
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
