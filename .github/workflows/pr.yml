@@ -1,0 +1,31 @@
+name: "Comment a Plan on a PR"
+
+on: [pull_request]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  terraform:
+    name: "Terraform CDK Diff"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "16"
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run Terraform CDK
+        uses: danielmschmidt/terraform-cdk-action@main
+        with:
+          terraformVersion: 1.0.7
+          cdktfVersion: 0.11.2
+          stackName: cdktf-github-actions-local
+          mode: plan-only
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
